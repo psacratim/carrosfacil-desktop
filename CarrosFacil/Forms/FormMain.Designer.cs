@@ -58,6 +58,7 @@
             this.statusLbData = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLbMensagem = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerPrincipal = new System.Windows.Forms.Timer(this.components);
+            this.vendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +92,8 @@
             this.menuCadModelos,
             this.menuCadCaracteristicas,
             this.menuCadCliente,
-            this.menuCadVeiculo});
+            this.menuCadVeiculo,
+            this.vendaToolStripMenuItem});
             this.menuCadastros.ForeColor = System.Drawing.Color.White;
             this.menuCadastros.Image = ((System.Drawing.Image)(resources.GetObject("menuCadastros.Image")));
             this.menuCadastros.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -369,5 +371,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuRelFuncionario;
         private System.Windows.Forms.ToolStripMenuItem menuRelClientes;
         private System.Windows.Forms.ToolStripMenuItem menuRelVeiculos;
+        private System.Windows.Forms.ToolStripMenuItem vendaToolStripMenuItem;
     }
 }

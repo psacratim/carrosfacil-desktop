@@ -63,23 +63,30 @@ namespace CarrosFacil.Forms
             this.gbItensVenda = new System.Windows.Forms.GroupBox();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.gbPagamneto = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtQtdeItens = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.tbDesconto = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbQuantidade = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tbValorTotal = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbTroco = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbDinheiroFisico = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbValorPago = new System.Windows.Forms.TextBox();
             this.lbFormaPagamento = new System.Windows.Forms.Label();
             this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtValorTotal = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtPercentualDesconto = new System.Windows.Forms.TextBox();
-            this.txtTotalDesconto = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtTotalVenda = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtQuantiaDinheiro = new System.Windows.Forms.TextBox();
-            this.labelTroco = new System.Windows.Forms.Label();
-            this.txtTroco = new System.Windows.Forms.TextBox();
             this.btFechaVenda = new System.Windows.Forms.Button();
             this.timerPrincipal = new System.Windows.Forms.Timer(this.components);
+            this.cbParcelas = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbTotalPago = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbTotalDesconto = new System.Windows.Forms.TextBox();
             this.pnTituloVenda.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbFuncionario.SuspendLayout();
@@ -139,7 +146,7 @@ namespace CarrosFacil.Forms
             this.btSair.Name = "btSair";
             this.btSair.Size = new System.Drawing.Size(100, 35);
             this.btSair.TabIndex = 2;
-            this.btSair.Text = "Sair (F9)";
+            this.btSair.Text = "Sair";
             this.btSair.UseVisualStyleBackColor = false;
             this.btSair.Click += new System.EventHandler(this.btSair_Click);
             // 
@@ -455,55 +462,188 @@ namespace CarrosFacil.Forms
             // gbPagamneto
             // 
             this.gbPagamneto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
+            this.gbPagamneto.Controls.Add(this.label10);
+            this.gbPagamneto.Controls.Add(this.tbTotalDesconto);
             this.gbPagamneto.Controls.Add(this.label9);
-            this.gbPagamneto.Controls.Add(this.txtQtdeItens);
+            this.gbPagamneto.Controls.Add(this.tbTotalPago);
+            this.gbPagamneto.Controls.Add(this.cbParcelas);
+            this.gbPagamneto.Controls.Add(this.label16);
+            this.gbPagamneto.Controls.Add(this.tbDesconto);
+            this.gbPagamneto.Controls.Add(this.panel2);
+            this.gbPagamneto.Controls.Add(this.panel1);
+            this.gbPagamneto.Controls.Add(this.label1);
+            this.gbPagamneto.Controls.Add(this.tbQuantidade);
+            this.gbPagamneto.Controls.Add(this.label15);
+            this.gbPagamneto.Controls.Add(this.tbValorTotal);
+            this.gbPagamneto.Controls.Add(this.label14);
+            this.gbPagamneto.Controls.Add(this.tbTroco);
+            this.gbPagamneto.Controls.Add(this.label12);
+            this.gbPagamneto.Controls.Add(this.tbDinheiroFisico);
+            this.gbPagamneto.Controls.Add(this.label8);
+            this.gbPagamneto.Controls.Add(this.label2);
+            this.gbPagamneto.Controls.Add(this.tbValorPago);
             this.gbPagamneto.Controls.Add(this.lbFormaPagamento);
             this.gbPagamneto.Controls.Add(this.cbFormaPagamento);
-            this.gbPagamneto.Controls.Add(this.label10);
-            this.gbPagamneto.Controls.Add(this.txtValorTotal);
-            this.gbPagamneto.Controls.Add(this.label13);
-            this.gbPagamneto.Controls.Add(this.txtPercentualDesconto);
-            this.gbPagamneto.Controls.Add(this.txtTotalDesconto);
-            this.gbPagamneto.Controls.Add(this.label11);
-            this.gbPagamneto.Controls.Add(this.txtTotalVenda);
-            this.gbPagamneto.Controls.Add(this.label1);
-            this.gbPagamneto.Controls.Add(this.txtQuantiaDinheiro);
-            this.gbPagamneto.Controls.Add(this.labelTroco);
-            this.gbPagamneto.Controls.Add(this.txtTroco);
             this.gbPagamneto.Controls.Add(this.btFechaVenda);
             this.gbPagamneto.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbPagamneto.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.gbPagamneto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(52)))), ((int)(((byte)(54)))));
-            this.gbPagamneto.Location = new System.Drawing.Point(0, 670);
+            this.gbPagamneto.Location = new System.Drawing.Point(0, 666);
             this.gbPagamneto.Name = "gbPagamneto";
-            this.gbPagamneto.Size = new System.Drawing.Size(1300, 150);
+            this.gbPagamneto.Size = new System.Drawing.Size(1300, 136);
             this.gbPagamneto.TabIndex = 6;
             this.gbPagamneto.TabStop = false;
             this.gbPagamneto.Text = "Checkout / Finalização";
             this.gbPagamneto.Enter += new System.EventHandler(this.gbPagamneto_Enter);
             // 
-            // label9
+            // label16
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 30);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 19);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Total Itens:";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(362, 50);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(97, 19);
+            this.label16.TabIndex = 30;
+            this.label16.Text = "Desconto (%):";
             // 
-            // txtQtdeItens
+            // tbDesconto
             // 
-            this.txtQtdeItens.Enabled = false;
-            this.txtQtdeItens.Location = new System.Drawing.Point(20, 50);
-            this.txtQtdeItens.Name = "txtQtdeItens";
-            this.txtQtdeItens.Size = new System.Drawing.Size(100, 25);
-            this.txtQtdeItens.TabIndex = 1;
-            this.txtQtdeItens.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbDesconto.Enabled = false;
+            this.tbDesconto.Location = new System.Drawing.Point(362, 71);
+            this.tbDesconto.MaxLength = 2;
+            this.tbDesconto.Name = "tbDesconto";
+            this.tbDesconto.Size = new System.Drawing.Size(97, 25);
+            this.tbDesconto.TabIndex = 31;
+            this.tbDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbDesconto.TextChanged += new System.EventHandler(this.tbDesconto_TextChanged);
+            this.tbDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDesconto_KeyPress);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(114)))), ((int)(((byte)(203)))));
+            this.panel2.Location = new System.Drawing.Point(711, 29);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(6, 95);
+            this.panel2.TabIndex = 29;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(114)))), ((int)(((byte)(203)))));
+            this.panel1.Location = new System.Drawing.Point(470, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(6, 97);
+            this.panel1.TabIndex = 28;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(731, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 19);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Qtd Itens:";
+            // 
+            // tbQuantidade
+            // 
+            this.tbQuantidade.Enabled = false;
+            this.tbQuantidade.Location = new System.Drawing.Point(731, 105);
+            this.tbQuantidade.Name = "tbQuantidade";
+            this.tbQuantidade.Size = new System.Drawing.Size(136, 25);
+            this.tbQuantidade.TabIndex = 27;
+            this.tbQuantidade.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(873, 29);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(74, 19);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Total (R$):";
+            // 
+            // tbValorTotal
+            // 
+            this.tbValorTotal.Enabled = false;
+            this.tbValorTotal.Location = new System.Drawing.Point(873, 50);
+            this.tbValorTotal.Name = "tbValorTotal";
+            this.tbValorTotal.Size = new System.Drawing.Size(147, 25);
+            this.tbValorTotal.TabIndex = 25;
+            this.tbValorTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbValorTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDinheiroPago_KeyPress);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(608, 50);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(78, 19);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Troco (R$):";
+            // 
+            // tbTroco
+            // 
+            this.tbTroco.Enabled = false;
+            this.tbTroco.Location = new System.Drawing.Point(608, 71);
+            this.tbTroco.MaxLength = 10;
+            this.tbTroco.Name = "tbTroco";
+            this.tbTroco.Size = new System.Drawing.Size(93, 25);
+            this.tbTroco.TabIndex = 23;
+            this.tbTroco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(487, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(97, 19);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Dinheiro (R$):";
+            // 
+            // tbDinheiroFisico
+            // 
+            this.tbDinheiroFisico.Enabled = false;
+            this.tbDinheiroFisico.Location = new System.Drawing.Point(487, 71);
+            this.tbDinheiroFisico.MaxLength = 10;
+            this.tbDinheiroFisico.Name = "tbDinheiroFisico";
+            this.tbDinheiroFisico.Size = new System.Drawing.Size(115, 25);
+            this.tbDinheiroFisico.TabIndex = 21;
+            this.tbDinheiroFisico.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbDinheiroFisico.TextChanged += new System.EventHandler(this.tbDinheiroFisico_TextChanged);
+            this.tbDinheiroFisico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDinheiroFisico_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(293, 50);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 19);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Parcelas:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(168, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 19);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Valor Pago (R$):";
+            // 
+            // tbValorPago
+            // 
+            this.tbValorPago.Enabled = false;
+            this.tbValorPago.Location = new System.Drawing.Point(168, 71);
+            this.tbValorPago.MaxLength = 10;
+            this.tbValorPago.Name = "tbValorPago";
+            this.tbValorPago.Size = new System.Drawing.Size(119, 25);
+            this.tbValorPago.TabIndex = 10;
+            this.tbValorPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbValorPago.TextChanged += new System.EventHandler(this.tbValorPago_TextChanged);
+            this.tbValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // lbFormaPagamento
             // 
             this.lbFormaPagamento.AutoSize = true;
-            this.lbFormaPagamento.Location = new System.Drawing.Point(20, 85);
+            this.lbFormaPagamento.Location = new System.Drawing.Point(12, 50);
             this.lbFormaPagamento.Name = "lbFormaPagamento";
             this.lbFormaPagamento.Size = new System.Drawing.Size(135, 19);
             this.lbFormaPagamento.TabIndex = 2;
@@ -512,112 +652,11 @@ namespace CarrosFacil.Forms
             // cbFormaPagamento
             // 
             this.cbFormaPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFormaPagamento.Location = new System.Drawing.Point(20, 105);
+            this.cbFormaPagamento.Location = new System.Drawing.Point(12, 71);
             this.cbFormaPagamento.Name = "cbFormaPagamento";
-            this.cbFormaPagamento.Size = new System.Drawing.Size(160, 25);
+            this.cbFormaPagamento.Size = new System.Drawing.Size(148, 25);
             this.cbFormaPagamento.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(155, 30);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(96, 19);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Subtotal (R$):";
-            // 
-            // txtValorTotal
-            // 
-            this.txtValorTotal.Enabled = false;
-            this.txtValorTotal.Location = new System.Drawing.Point(155, 50);
-            this.txtValorTotal.Name = "txtValorTotal";
-            this.txtValorTotal.Size = new System.Drawing.Size(138, 25);
-            this.txtValorTotal.TabIndex = 5;
-            this.txtValorTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(315, 30);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(97, 19);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Desconto (%):";
-            // 
-            // txtPercentualDesconto
-            // 
-            this.txtPercentualDesconto.Location = new System.Drawing.Point(315, 50);
-            this.txtPercentualDesconto.MaxLength = 3;
-            this.txtPercentualDesconto.Name = "txtPercentualDesconto";
-            this.txtPercentualDesconto.Size = new System.Drawing.Size(50, 25);
-            this.txtPercentualDesconto.TabIndex = 7;
-            this.txtPercentualDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtTotalDesconto
-            // 
-            this.txtTotalDesconto.Enabled = false;
-            this.txtTotalDesconto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.txtTotalDesconto.Location = new System.Drawing.Point(371, 50);
-            this.txtTotalDesconto.Name = "txtTotalDesconto";
-            this.txtTotalDesconto.Size = new System.Drawing.Size(115, 25);
-            this.txtTotalDesconto.TabIndex = 8;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.label11.Location = new System.Drawing.Point(520, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 19);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "TOTAL LÍQUIDO";
-            // 
-            // txtTotalVenda
-            // 
-            this.txtTotalVenda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.txtTotalVenda.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTotalVenda.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.txtTotalVenda.ForeColor = System.Drawing.Color.White;
-            this.txtTotalVenda.Location = new System.Drawing.Point(520, 50);
-            this.txtTotalVenda.Name = "txtTotalVenda";
-            this.txtTotalVenda.Size = new System.Drawing.Size(240, 43);
-            this.txtTotalVenda.TabIndex = 11;
-            this.txtTotalVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(800, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 19);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Recebido (R$):";
-            // 
-            // txtQuantiaDinheiro
-            // 
-            this.txtQuantiaDinheiro.Location = new System.Drawing.Point(800, 50);
-            this.txtQuantiaDinheiro.Name = "txtQuantiaDinheiro";
-            this.txtQuantiaDinheiro.Size = new System.Drawing.Size(120, 25);
-            this.txtQuantiaDinheiro.TabIndex = 13;
-            this.txtQuantiaDinheiro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelTroco
-            // 
-            this.labelTroco.AutoSize = true;
-            this.labelTroco.Location = new System.Drawing.Point(800, 85);
-            this.labelTroco.Name = "labelTroco";
-            this.labelTroco.Size = new System.Drawing.Size(78, 19);
-            this.labelTroco.TabIndex = 15;
-            this.labelTroco.Text = "Troco (R$):";
-            // 
-            // txtTroco
-            // 
-            this.txtTroco.Enabled = false;
-            this.txtTroco.Location = new System.Drawing.Point(800, 105);
-            this.txtTroco.Name = "txtTroco";
-            this.txtTroco.Size = new System.Drawing.Size(120, 25);
-            this.txtTroco.TabIndex = 16;
-            this.txtTroco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cbFormaPagamento_SelectedIndexChanged_1);
             // 
             // btFechaVenda
             // 
@@ -628,21 +667,66 @@ namespace CarrosFacil.Forms
             this.btFechaVenda.ForeColor = System.Drawing.Color.White;
             this.btFechaVenda.Image = ((System.Drawing.Image)(resources.GetObject("btFechaVenda.Image")));
             this.btFechaVenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btFechaVenda.Location = new System.Drawing.Point(1000, 45);
+            this.btFechaVenda.Location = new System.Drawing.Point(1050, 50);
             this.btFechaVenda.Name = "btFechaVenda";
             this.btFechaVenda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btFechaVenda.Size = new System.Drawing.Size(260, 60);
+            this.btFechaVenda.Size = new System.Drawing.Size(225, 60);
             this.btFechaVenda.TabIndex = 17;
             this.btFechaVenda.Text = "    FINALIZAR VENDA";
             this.btFechaVenda.UseVisualStyleBackColor = false;
             this.btFechaVenda.Click += new System.EventHandler(this.btFechaVenda_Click);
+            // 
+            // cbParcelas
+            // 
+            this.cbParcelas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbParcelas.Enabled = false;
+            this.cbParcelas.Location = new System.Drawing.Point(297, 71);
+            this.cbParcelas.Name = "cbParcelas";
+            this.cbParcelas.Size = new System.Drawing.Size(59, 25);
+            this.cbParcelas.TabIndex = 32;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(731, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 19);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Total Pago (R$):";
+            // 
+            // tbTotalPago
+            // 
+            this.tbTotalPago.Enabled = false;
+            this.tbTotalPago.Location = new System.Drawing.Point(731, 50);
+            this.tbTotalPago.Name = "tbTotalPago";
+            this.tbTotalPago.Size = new System.Drawing.Size(136, 25);
+            this.tbTotalPago.TabIndex = 34;
+            this.tbTotalPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(873, 85);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(137, 19);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Total Desconto (R$):";
+            // 
+            // tbTotalDesconto
+            // 
+            this.tbTotalDesconto.Enabled = false;
+            this.tbTotalDesconto.Location = new System.Drawing.Point(873, 105);
+            this.tbTotalDesconto.Name = "tbTotalDesconto";
+            this.tbTotalDesconto.Size = new System.Drawing.Size(147, 25);
+            this.tbTotalDesconto.TabIndex = 36;
+            this.tbTotalDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FormVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(1300, 820);
+            this.ClientSize = new System.Drawing.Size(1300, 802);
             this.Controls.Add(this.gbItensVenda);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.gbProdutos);
@@ -686,12 +770,6 @@ namespace CarrosFacil.Forms
         private System.Windows.Forms.DataGridView dgvCliente;
         private System.Windows.Forms.TextBox txtPesqCliente;
         private System.Windows.Forms.Button btBuscaCliente;
-        private System.Windows.Forms.TextBox txtTotalVenda;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtTotalDesconto;
-        private System.Windows.Forms.TextBox txtPercentualDesconto;
-        private System.Windows.Forms.TextBox txtValorTotal;
-        private System.Windows.Forms.TextBox txtQtdeItens;
         private System.Windows.Forms.TextBox txtQtdeEstoque;
         private System.Windows.Forms.TextBox txtProduto;
         private System.Windows.Forms.GroupBox gbProdutos;
@@ -699,9 +777,6 @@ namespace CarrosFacil.Forms
         private System.Windows.Forms.TextBox txtPesqProduto;
         private System.Windows.Forms.Button btBuscaProduto;
         private System.Windows.Forms.Button btFechaVenda;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox gbItensVenda;
         private System.Windows.Forms.DataGridView dgvItens;
         private System.Windows.Forms.Label label7;
@@ -723,11 +798,27 @@ namespace CarrosFacil.Forms
         private System.Windows.Forms.TextBox txtDataVenda;
         private System.Windows.Forms.GroupBox gbPagamneto;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label labelTroco;
-        private System.Windows.Forms.TextBox txtTroco;
-        private System.Windows.Forms.TextBox txtQuantiaDinheiro;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelVendaAviso;
         private System.Windows.Forms.Timer timerPrincipal;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbValorTotal;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox tbTroco;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbDinheiroFisico;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbValorPago;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbQuantidade;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox tbDesconto;
+        private System.Windows.Forms.ComboBox cbParcelas;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tbTotalPago;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbTotalDesconto;
     }
 }

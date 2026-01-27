@@ -34,6 +34,12 @@ namespace CarrosFacil.Forms
             cbFormaPagamento.Items.Add("Pix");
             cbFormaPagamento.SelectedIndex = -1;
 
+            // COMBO PARCELAS
+            for (int parcela = 1; parcela <= 24; parcela++)
+            {
+                cbParcelas.Items.Add(parcela.ToString());
+            }
+
             // COMBO FUNCIONARIOS
             _ = Task.Run(() =>
             {
@@ -182,8 +188,8 @@ namespace CarrosFacil.Forms
             dgvItens.DataSource = dt;
 
             // Atualiza os campos de valor.
-            txtValorTotal.Text = vendaTotal.ToString("N2");
-            txtQtdeItens.Text = qntItensVenda.ToString();
+            tbValorTotal.Text = vendaTotal.ToString("N2");
+            tbQuantidade.Text = qntItensVenda.ToString();
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
@@ -204,31 +210,9 @@ namespace CarrosFacil.Forms
             qntItensVenda++;
 
             AtualizarItensVenda();
-            txtPercentualDesconto_TextChanged(this, new EventArgs());
+            tbDesconto_TextChanged(this, new EventArgs());
         }
 
-        private void txtPercentualDesconto_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPercentualDesconto.Text == "" || txtPercentualDesconto.Text == "0") {
-                decimal valorTotal = Convert.ToDecimal(txtValorTotal.Text);
-                txtTotalVenda.Text = valorTotal.ToString("N2");
-
-                txtPercentualDesconto.Text = "0";
-                txtPercentualDesconto.SelectAll();
-
-                txtTotalDesconto.Text = "0,00";
-                return;
-            }
-
-            decimal percentual = Convert.ToDecimal(txtPercentualDesconto.Text) / 100;
-            decimal valorVenda = Convert.ToDecimal(txtValorTotal.Text);
-            decimal valorDesconto = percentual * valorVenda;
-
-            txtTotalDesconto.Text = valorDesconto.ToString("N2");
-
-            decimal totalVenda = valorVenda - valorDesconto;
-            txtTotalVenda.Text = totalVenda.ToString("N2");
-        }
 
         private void Limpar()
         {
@@ -244,12 +228,12 @@ namespace CarrosFacil.Forms
             AtualizarItensVenda();
             dgvItens.Refresh();
 
-            txtValorTotal.Text = "0";
-            txtTotalVenda.Text = "0";
-            txtPercentualDesconto.Text = "0";
-            txtTotalDesconto.Text = "0";
+            tbValorTotal.Text = "0";
+            tbValorPago.Text = "0";
+            tbDesconto.Text = "0";
+            tbQuantidade.Text = "0";
+            tbDinheiroFisico.Clear();
 
-            txtQtdeItens.Clear();
             cbFormaPagamento.SelectedIndex = -1;
             vendaTotal = 0;
         }
@@ -291,11 +275,37 @@ namespace CarrosFacil.Forms
                 return;
             }
 
+            bool efetuouPagamento = decimal.TryParse(tbValorPago.Text, out decimal valorPago);
+            bool temValorTotal = decimal.TryParse(tbValorTotal.Text, out decimal valorTotal);
+            bool temDesconto = decimal.TryParse(tbTotalDesconto.Text, out decimal valorDesconto);
+            if (!efetuouPagamento || valorPago <= 0)
+            {
+                MessageBox.Show("Por favor, adicione o valor do pagamento.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!temValorTotal || valorTotal <= 0)
+            {
+                MessageBox.Show("Erro: Nenhum valor total está re-definido, feche o formulário e tente novamente.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (temDesconto && valorDesconto > 0)
+            {
+                valorTotal = valorDesconto;
+            }
+
+            if (valorPago < valorTotal)
+            {
+                MessageBox.Show("Erro: O cliente está pagando menos que o valor total, ajuste a quantia paga.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // Criar objeto de venda, alocar os dados e efetuar o cadastro.
             Venda venda = new Venda();
             venda.id_cliente = Convert.ToInt32(dgvCliente.SelectedRows[0].Cells[0].Value);
             venda.id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
-            venda.valor_total = Convert.ToDecimal(txtTotalVenda.Text);
+            venda.valor_total = Convert.ToDecimal(tbValorTotal.Text);
             bool temErro = !venda.Cadastrar();
 
             // Se deu erro, avise o usuário.
@@ -335,22 +345,22 @@ namespace CarrosFacil.Forms
 
         private void txtQuantiaDinheiro_TextChanged(object sender, EventArgs e)
         {
-            if (txtQuantiaDinheiro.Text == "")
+            if (tbDinheiroFisico.Text == "")
             {
-                txtQuantiaDinheiro.Text = "0";
+                tbDinheiroFisico.Text = "0";
             }
 
-            decimal quantia = Convert.ToDecimal(txtQuantiaDinheiro.Text);
+            decimal quantia = Convert.ToDecimal(tbDinheiroFisico.Text);
             decimal troco = Math.Min(0, quantia - vendaTotal);
 
-            txtTroco.Text = troco.ToString("N2");
+            tbTroco.Text = troco.ToString("N2");
         }
 
         private void cbFormaPagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool isMoney = cbFormaPagamento.SelectedIndex == 2;
 
-            txtQuantiaDinheiro.Enabled = isMoney;
+            tbDinheiroFisico.Enabled = isMoney;
         }
 
         private void btRemover_Click(object sender, EventArgs e)
@@ -358,14 +368,13 @@ namespace CarrosFacil.Forms
             decimal valorTotal = Convert.ToDecimal(dgvItens.SelectedRows[0].Cells[4].Value);
             vendaTotal = vendaTotal - valorTotal;
 
-            txtTotalVenda.Text = vendaTotal.ToString();
-            txtValorTotal.Text = vendaTotal.ToString();
+            tbValorTotal.Text = vendaTotal.ToString("N2");
 
             itensVenda.RemoveAt(dgvItens.SelectedRows[0].Index);
             AtualizarItensVenda();
 
-            txtQtdeItens.Text = itensVenda.Count.ToString();
-            txtPercentualDesconto_TextChanged(this, new EventArgs());
+            tbQuantidade.Text = itensVenda.Count.ToString();
+            tbDesconto_TextChanged(this, new EventArgs());
 
             // Obter o ID do produto selecionado
 
@@ -376,6 +385,115 @@ namespace CarrosFacil.Forms
         private void gbPagamneto_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void tbDinheiroPago_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void tbDinheiroFisico_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (decimal.TryParse(tbDinheiroFisico.Text, out decimal dinheiroFisico) && 
+                decimal.TryParse(tbValorTotal.Text, out decimal valorTotal) &&
+                decimal.TryParse(tbValorPago.Text, out decimal valorPago)
+                )
+            {
+                decimal troco = Math.Min(0, valorTotal - valorPago - dinheiroFisico);
+                tbTroco.Text = troco.ToString("N2");
+            }
+        }
+
+        private void tbDesconto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void AtualizarValorTotalPago()
+        {
+            bool temValorTotal = decimal.TryParse(tbValorTotal.Text, out decimal valorTotal);
+            if (!temValorTotal)
+            {
+                valorTotal = 0;
+            }
+
+            bool temDinheiro = decimal.TryParse(tbDinheiroFisico.Text, out decimal dinheiroFisico);
+            if (!temDinheiro)
+            {
+                dinheiroFisico = 0;
+            }
+
+            bool temPagamento = decimal.TryParse(tbValorPago.Text, out decimal valorPago);
+            if (!temPagamento)
+            {
+                valorPago = 0;
+            }
+
+            bool temDesconto = int.TryParse(tbDesconto.Text, out int desconto);
+            if (!temDesconto)
+            {
+                desconto = 0;
+            }
+
+            decimal valorTotalPago = dinheiroFisico + valorPago;
+
+            decimal descontoFator = (1M - (desconto / 100M));
+            decimal totalDesconto = valorTotal * descontoFator;
+
+            tbTotalPago.Text = valorTotalPago.ToString("N2");
+            tbTotalDesconto.Text = totalDesconto.ToString("N2");
+        }
+
+        private void tbDesconto_TextChanged(object sender, EventArgs e)
+        {
+            AtualizarValorTotalPago();
+        }
+
+        private void tbDinheiroFisico_TextChanged(object sender, EventArgs e)
+        {
+            AtualizarValorTotalPago();
+        }
+
+        private void tbValorPago_TextChanged(object sender, EventArgs e)
+        {
+            AtualizarValorTotalPago();
+        }
+
+        private void cbFormaPagamento_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            cbParcelas.Enabled = cbFormaPagamento.SelectedIndex == 0;
+            tbDinheiroFisico.Enabled = cbFormaPagamento.SelectedIndex == 2;
+
+            tbDesconto.Enabled = true;
+
+            if (cbFormaPagamento.SelectedIndex != 2)
+            {
+                tbValorPago.Enabled = true;
+                tbDinheiroFisico.Text = "0";
+            }
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using MySql.Data.MySqlClient;
 
@@ -10,14 +6,6 @@ namespace CarrosFacil
 {
     class Conexao
     {
-        // MySqlCommand -> TRATA OS TIPOS DE COMANDO E CADA AÇÃO QUE DEVERÁ SER TOMADA, POR EXEMPLO UM SELECT OU INSERT
-        // MySqlDataAdapter-> RESULTADO DO ExecuteReader (utilizado para executar uma instrução SQL que retorna um DataReader)
-        // MySqlDataAdapter SERÁ USADO PARA EXECUTAR COMANDOS USANDO UM DataSet OU DataTable
-        // DataSet -> ARMAZENA DADOS EM EM MEMÓRIA, PODEMOS TER UM CONJUNTO DE TABELAS
-        // DataTable -> É UMA TABELA APENAS QUE PODEMOS MONTAR NO AMBIENTE DE PROGRAMAÇÃO, REPRESENTA UMA TABELA DE DADOS NA MEMÓRIA
-
-        //PRECISAMOS USAR UM OBJETO PARA A CONEXÃO COM O BANCO
-        //OBJETO MySqlConnection TRATA A CONEXÃO COM O MySQL ou MariaDB
         private MySqlConnection conexao;
 
         private string erro;
