@@ -175,8 +175,7 @@ namespace CarrosFacil.Entities
 
         public DataTable ConsultarSemFiltros()
         {
-            string query = "SELECT id '#', nome 'Nome', cpf 'CPF', telefone1 'Telefone 1', telefone2 'Telefone 2', data_nascimento 'Data Nascimento', status 'Status' " +
-                            "FROM cliente WHERE status = 1 ORDER BY nome;";
+            string query = "SELECT id '#', nome 'Nome', cpf 'CPF', telefone1 'Telefone 1', telefone2 'Telefone 2', data_nascimento 'Data Nascimento', status 'Status' FROM cliente WHERE status = 1 ORDER BY nome;";
 
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(query);
@@ -312,6 +311,14 @@ namespace CarrosFacil.Entities
         public DataTable RelatorioPorIdade(int minima, int maxima)
         {
             string query = "SELECT cliente.cpf, cliente.nome, cliente.estado_civil, cliente.data_nascimento, cliente.cidade, cliente.sexo FROM cliente WHERE cliente.status = 1 AND TIMESTAMPDIFF(YEAR, cliente.data_nascimento, NOW()) BETWEEN " + minima + " AND " + maxima + " ORDER BY cliente.nome;";
+
+            Conexao conexao = new Conexao();
+            return conexao.RetornaDados(query);
+        }
+
+        public DataTable BuscarCliente()
+        {
+            string query = "SELECT id, nome FROM cliente WHERE status = 1";
 
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(query);

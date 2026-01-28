@@ -16,6 +16,7 @@ namespace CarrosFacil.Forms
         private List<ItemVenda> itensVenda = new List<ItemVenda>(); // Lista de itens que aparecerá na grid de itens vendidos.
         private decimal vendaTotal = 0; // Valor total da venda
         private int qntItensVenda = 0;
+        private Dictionary<int, int> contadorEstoque = new Dictionary<int, int>();
 
         public FormVenda()
         {
@@ -206,8 +207,26 @@ namespace CarrosFacil.Forms
             item.valor_unitario = Convert.ToDecimal(txtValor.Text);
             item.valor_total = Convert.ToDecimal(txtTotal.Text);
 
+            if (!int.TryParse(txtQtdeEstoque.Text, out int quantidadeEstoque))
+            {
+                quantidadeEstoque = 0;
+            }
+
+            if (!contadorEstoque.TryGetValue(item.id, out int quantidadeComprada))
+            {
+                quantidadeComprada = 0;
+            }
+
+            if (quantidadeComprada > quantidadeEstoque)
+            {
+                MessageBox.Show("Falha ao adicionar, produto com estoque insuficiente.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             itensVenda.Add(item);
             qntItensVenda++;
+
+            contadorEstoque[item.id] = quantidadeEstoque + item.quantidade;
 
             AtualizarItensVenda();
             tbDesconto_TextChanged(this, new EventArgs());
@@ -301,11 +320,19 @@ namespace CarrosFacil.Forms
                 return;
             }
 
+            if (!decimal.TryParse(tbDesconto.Text, out decimal desconto))
+            {
+                desconto = 0;
+            }
+
             // Criar objeto de venda, alocar os dados e efetuar o cadastro.
             Venda venda = new Venda();
             venda.id_cliente = Convert.ToInt32(dgvCliente.SelectedRows[0].Cells[0].Value);
             venda.id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
             venda.valor_total = Convert.ToDecimal(tbValorTotal.Text);
+            venda.valor_desconto = Convert.ToDecimal(tbTotalDesconto.Text);
+            venda.desconto = desconto;
+
             bool temErro = !venda.Cadastrar();
 
             // Se deu erro, avise o usuário.
@@ -341,6 +368,7 @@ namespace CarrosFacil.Forms
             }
 
             MessageBox.Show("Sucesso: A venda foi cadastrada com sucesso!\n" + mensagemItens, "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Limpar();
         }
 
         private void txtQuantiaDinheiro_TextChanged(object sender, EventArgs e)
@@ -366,11 +394,13 @@ namespace CarrosFacil.Forms
         private void btRemover_Click(object sender, EventArgs e)
         {
             decimal valorTotal = Convert.ToDecimal(dgvItens.SelectedRows[0].Cells[4].Value);
+            int quantidade = Convert.ToInt32(dgvItens.SelectedRows[0].Cells[3].Value);
             vendaTotal = vendaTotal - valorTotal;
 
             tbValorTotal.Text = vendaTotal.ToString("N2");
 
             itensVenda.RemoveAt(dgvItens.SelectedRows[0].Index);
+
             AtualizarItensVenda();
 
             tbQuantidade.Text = itensVenda.Count.ToString();

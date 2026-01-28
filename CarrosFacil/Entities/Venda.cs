@@ -12,6 +12,8 @@ namespace CarrosFacil.Entities
         public int id_funcionario { get; set; }
         public int id_cliente { get; set; }
         public decimal valor_total { get; set; }
+        public decimal valor_desconto { get; set; }
+        public decimal desconto { get; set; }
         public DateTime data_cadastro { get; set; }
         public int status { get; set; }
 
@@ -21,16 +23,20 @@ namespace CarrosFacil.Entities
             this.id_funcionario = 0;
             this.id_cliente = 0;
             this.valor_total = 0;
+            this.valor_desconto = 0;
+            this.desconto = 0;
             this.data_cadastro = DateTime.Now;
             this.status = 0;
         }
 
         public bool Cadastrar()
         {
-            string query = string.Format("INSERT INTO venda VALUES (0, {0}, {1}, {2}, NOW(), 1);",
+            string query = string.Format("INSERT INTO venda VALUES (0, {0}, {1}, {2}, {3}, {4}, NOW(), 1);",
                 id_funcionario,
                 id_cliente,
-                valor_total.ToString().Replace(",", ".")
+                valor_total.ToString().Replace(",", "."),
+                valor_desconto.ToString().Replace(",", "."),
+                desconto
             );
 
             Conexao conexao = new Conexao();

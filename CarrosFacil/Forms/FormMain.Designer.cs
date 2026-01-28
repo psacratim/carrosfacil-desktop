@@ -39,6 +39,7 @@
             this.menuCadCaracteristicas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCadCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCadVeiculo = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConsFuncionarios = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConsClientes = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,7 @@
             this.menuRelFuncionario = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRelClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRelVeiculos = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRelVendas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVendas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSair = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -58,7 +60,6 @@
             this.statusLbData = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLbMensagem = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerPrincipal = new System.Windows.Forms.Timer(this.components);
-            this.vendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -156,6 +157,11 @@
             this.menuCadVeiculo.Text = "Veículo";
             this.menuCadVeiculo.Click += new System.EventHandler(this.menuCadVeiculo_Click);
             // 
+            // vendaToolStripMenuItem
+            // 
+            this.vendaToolStripMenuItem.Name = "vendaToolStripMenuItem";
+            this.vendaToolStripMenuItem.Size = new System.Drawing.Size(191, 24);
+            // 
             // menuConsFuncionarios
             // 
             this.menuConsFuncionarios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -226,7 +232,8 @@
             this.menuRelatorios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuRelFuncionario,
             this.menuRelClientes,
-            this.menuRelVeiculos});
+            this.menuRelVeiculos,
+            this.menuRelVendas});
             this.menuRelatorios.ForeColor = System.Drawing.Color.White;
             this.menuRelatorios.Image = ((System.Drawing.Image)(resources.GetObject("menuRelatorios.Image")));
             this.menuRelatorios.Name = "menuRelatorios";
@@ -236,23 +243,30 @@
             // menuRelFuncionario
             // 
             this.menuRelFuncionario.Name = "menuRelFuncionario";
-            this.menuRelFuncionario.Size = new System.Drawing.Size(166, 24);
+            this.menuRelFuncionario.Size = new System.Drawing.Size(180, 24);
             this.menuRelFuncionario.Text = "Funcionários";
             this.menuRelFuncionario.Click += new System.EventHandler(this.menuRelFuncionario_Click);
             // 
             // menuRelClientes
             // 
             this.menuRelClientes.Name = "menuRelClientes";
-            this.menuRelClientes.Size = new System.Drawing.Size(166, 24);
+            this.menuRelClientes.Size = new System.Drawing.Size(180, 24);
             this.menuRelClientes.Text = "Clientes";
             this.menuRelClientes.Click += new System.EventHandler(this.menuRelClientes_Click);
             // 
             // menuRelVeiculos
             // 
             this.menuRelVeiculos.Name = "menuRelVeiculos";
-            this.menuRelVeiculos.Size = new System.Drawing.Size(166, 24);
+            this.menuRelVeiculos.Size = new System.Drawing.Size(180, 24);
             this.menuRelVeiculos.Text = "Veículos";
             this.menuRelVeiculos.Click += new System.EventHandler(this.menuRelVeiculos_Click);
+            // 
+            // menuRelVendas
+            // 
+            this.menuRelVendas.Name = "menuRelVendas";
+            this.menuRelVendas.Size = new System.Drawing.Size(180, 24);
+            this.menuRelVendas.Text = "Vendas";
+            this.menuRelVendas.Click += new System.EventHandler(this.menuRelVendas_Click);
             // 
             // menuVendas
             // 
@@ -372,5 +386,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuRelClientes;
         private System.Windows.Forms.ToolStripMenuItem menuRelVeiculos;
         private System.Windows.Forms.ToolStripMenuItem vendaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuRelVendas;
     }
 }

@@ -257,7 +257,13 @@
     <Compile Include="Forms\Relatorios\FormRelVeiculos.Designer.cs">
       <DependentUpon>FormRelVeiculos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Relatorios\RelVenda.cs" />
+    <Compile Include="Entities\RelVenda.cs" />
+    <Compile Include="Forms\Relatorios\FormRelVendaDetalhado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Relatorios\FormRelVendaDetalhado.Designer.cs">
+      <DependentUpon>FormRelVendaDetalhado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mocker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,9 +328,13 @@
     <EmbeddedResource Include="Forms\Relatorios\FormRelVeiculos.resx">
       <DependentUpon>FormRelVeiculos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Relatorios\FormRelVendaDetalhado.resx">
+      <DependentUpon>FormRelVendaDetalhado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Relatorios\RDLCs\RPTCliente.rdlc" />
     <EmbeddedResource Include="Forms\Relatorios\RDLCs\RPTFuncionario.rdlc" />
     <EmbeddedResource Include="Forms\Relatorios\RDLCs\RPTVeiculos.rdlc" />
+    <EmbeddedResource Include="Forms\Relatorios\RDLCs\RPTVendaDetalhado.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -338,6 +348,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CarrosFacil.Entities.Cliente.datasource" />
     <None Include="Properties\DataSources\CarrosFacil.Entities.Funcionario.datasource" />
+    <None Include="Properties\DataSources\CarrosFacil.Entities.RelVenda.datasource" />
     <None Include="Properties\DataSources\CarrosFacil.Entities.Veiculo.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
