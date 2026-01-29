@@ -20,9 +20,11 @@ namespace CarrosFacil.Entities
         public int quantidade { get; set; }
         public decimal valor_unitario { get; set; }
         public decimal valor_total_itens { get; set; }
-        public List<int> id_pagamentos { get; set; }
+        public int id_pagamento { get; set; }
         public DateTime data_cadastro { get; set; }
+
         public string metodo { get; set; }
+        public decimal valor_pagamento { get; set; }
 
 
         public RelVenda()
@@ -38,54 +40,53 @@ namespace CarrosFacil.Entities
             this.valor_unitario = 0;
             this.valor_total_itens = 0;
 
-            this.id_pagamentos = new List<int>();
-
             this.id_marca = 0;
-
             this.data_cadastro = new DateTime();
+
+            this.id_pagamento = 0;
+            this.valor_pagamento = 0;
             this.metodo = "";
         }
 
+
+        private string BASE_QUERY = "SELECT venda.id AS id_venda, veiculo.id AS id_veiculo, venda.data_cadastro, venda.desconto AS desconto, venda.valor_total AS valor_total, funcionario.nome AS id_funcionario, cliente.nome AS id_cliente, ( SELECT GROUP_CONCAT(pv.metodo SEPARATOR ', ') FROM pagamento_venda pv WHERE pv.id_venda = venda.id) AS metodo, modelo.nome AS id_modelo, marca.nome AS id_marca, item_venda.quantidade, item_venda.valor_unitario, item_venda.valor_total AS valor_total_itens FROM venda INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo INNER JOIN marca ON marca.id = modelo.id_marca";
+
         public DataTable GerarRelatorioPorData(DateTime inicio, DateTime fim)
         {
-            string sql = string.Format("SELECT venda.id, venda.data_cadastro, venda.desconto, venda.valor_total, venda.valor_desconto, funcionario.nome, cliente.nome, pagamento_venda.metodo, modelo.nome FROM venda LEFT JOIN pagamento_venda ON pagamento_venda.id_venda = venda.id INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '%s' AND '%s' GROUP BY venda.id ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"));
-
+            string sql = string.Format(BASE_QUERY + " WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '{0}' AND '{1}' ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"));
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(sql);
         }
 
-        public DataTable GerarRelatorioDetalhadoCliente(int id)
+        public DataTable GerarRelatorioDetalhadoCliente(int idCliente)
         {
-            string sql = string.Format("SELECT venda.id 'id_venda', veiculo.id 'id_veiculo', venda.data_cadastro, venda.desconto 'desconto', venda.valor_total 'valor_total', venda.desconto 'desconto', funcionario.nome 'id_funcionario', cliente.nome 'id_cliente', pagamento_venda.metodo, modelo.nome 'id_modelo', marca.nome 'id_marca', item_venda.quantidade 'quantidade', item_venda.valor_unitario 'valor_unitario', item_venda.valor_total 'valor_total_itens' FROM venda LEFT JOIN pagamento_venda ON pagamento_venda.id_venda = venda.id INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo INNER JOIN marca ON marca.id = modelo.id_marca WHERE venda.id_cliente = {0} ORDER BY venda.data_cadastro;", id);
-
-            // id_veiculo, id_marca, quantidade, valor_unitario, valor_total_itens, id_venda, id_cliente, id_funcionario, desconto, valor_total
-
+            string sql = string.Format(BASE_QUERY + " WHERE venda.id_cliente = {0} ORDER BY venda.data_cadastro;", idCliente);
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(sql);
         }
 
-        public DataTable GerarRelatorioPorPeriodoCliente(DateTime inicio, DateTime fim, int id)
+        public DataTable GerarRelatorioPorPeriodoCliente(DateTime inicio, DateTime fim, int idCliente)
         {
-            string sql = string.Format("SELECT venda.id, venda.data_cadastro, venda.desconto, venda.valor_total, venda.valor_desconto, funcionario.nome, cliente.nome, pagamento_venda.metodo, modelo.nome FROM venda LEFT JOIN pagamento_venda ON pagamento_venda.id_venda = venda.id INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '%s' AND '%s' AND venda.id_cliente = %s GROUP BY venda.id ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"), id);
-
+            string sql = string.Format(BASE_QUERY + " WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '{0}' AND '{1}' AND venda.id_cliente = {2} ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"), idCliente);
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(sql);
         }
 
-        public DataTable GerarRelatorioDetalhadoPorPeriodoFuncionario(DateTime inicio, DateTime fim, int id)
+
+        public DataTable GerarRelatorioDetalhadoPorPeriodoFuncionario(DateTime inicio, DateTime fim, int idFuncionario)
         {
-            string sql = string.Format("SELECT venda.id, venda.data_cadastro, venda.desconto, venda.valor_total, venda.valor_desconto, funcionario.nome, cliente.nome, pagamento_venda.metodo, modelo.nome, item_venda.valor_total 'valor_total_itens' FROM venda LEFT JOIN pagamento_venda ON pagamento_venda.id_venda = venda.id INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '%s' AND '%s' AND venda.id_funcionario = %s GROUP BY venda.id ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"), id);
-
+            string sql = string.Format(BASE_QUERY + " WHERE CAST(venda.data_cadastro AS DATE) BETWEEN '{0}' AND '{1}' AND venda.id_funcionario = {2} ORDER BY venda.data_cadastro;", inicio.ToString("yyyy-MM-dd"), fim.ToString("yyyy-MM-dd"), idFuncionario);
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(sql);
         }
 
-        public DataTable GerarRelatorioDetalhadoFuncionario(int id)
+
+        public DataTable GerarRelatorioDetalhadoFuncionario(int idFuncionario)
         {
-            string sql = string.Format("SELECT venda.id, venda.data_cadastro, venda.desconto, venda.valor_total, venda.valor_desconto, funcionario.nome, cliente.nome, pagamento_venda.metodo, modelo.nome FROM venda LEFT JOIN pagamento_venda ON pagamento_venda.id_venda = venda.id INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo WHERE venda.id_funcionario = %s GROUP BY venda.id ORDER BY venda.data_cadastro;", id);
-
+            string sql = string.Format(BASE_QUERY + " WHERE venda.id_funcionario = {0} ORDER BY venda.data_cadastro;", idFuncionario);
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(sql);
         }
+
     }
 }

@@ -105,7 +105,7 @@ namespace CarrosFacil.Forms.Relatorios
                     }
 
                     int id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
-                    RelVendaBindingSource.DataSource = relVenda.GerarRelatorioDetalhadoCliente(id_funcionario);
+                    RelVendaBindingSource.DataSource = relVenda.GerarRelatorioDetalhadoFuncionario(id_funcionario);
                     rvVendas.RefreshReport();
                     break;
 
@@ -117,11 +117,20 @@ namespace CarrosFacil.Forms.Relatorios
                         MessageBox.Show("Por favor, selecione um cliente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     }
+                    gbCliente.BackColor = SystemColors.Window;
 
-                    id_cliente = Convert.ToInt32(cbCliente.SelectedValue);
                     DateTime inicio = dtpDataInicial.Value;
                     DateTime fim = dtpDataFinal.Value;
+                    if (inicio.Millisecond > fim.Millisecond)
+                    {
+                        dtpDataInicial.Focus();
+                        gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
+                        MessageBox.Show("A data de início não pode ser maior que a do fim.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    }
+                    gbPeriodo.BackColor = SystemColors.Window;
 
+                    id_cliente = Convert.ToInt32(cbCliente.SelectedValue);
                     RelVendaBindingSource.DataSource = relVenda.GerarRelatorioPorPeriodoCliente(inicio, fim, id_cliente);
                     rvVendas.RefreshReport();
                     break;
@@ -134,10 +143,20 @@ namespace CarrosFacil.Forms.Relatorios
                         MessageBox.Show("Por favor, selecione um funcionário", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         break;
                     }
+                    gbFuncionario.BackColor = SystemColors.Window;
 
-                    id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
                     inicio = dtpDataInicial.Value;
                     fim = dtpDataFinal.Value;
+                    if (inicio.Millisecond > fim.Millisecond)
+                    {
+                        dtpDataInicial.Focus();
+                        gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
+                        MessageBox.Show("A data de início não pode ser maior que a do fim.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    }
+                    gbPeriodo.BackColor = SystemColors.Window;
+
+                    id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
 
                     RelVendaBindingSource.DataSource = relVenda.GerarRelatorioDetalhadoPorPeriodoFuncionario(inicio, fim, id_funcionario);
                     rvVendas.RefreshReport();
@@ -145,6 +164,14 @@ namespace CarrosFacil.Forms.Relatorios
                 default:
                     inicio = dtpDataInicial.Value;
                     fim = dtpDataFinal.Value;
+                    if (inicio.Millisecond > fim.Millisecond)
+                    {
+                        dtpDataInicial.Focus();
+                        gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
+                        MessageBox.Show("A data de início não pode ser maior que a do fim.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+                    }
+                    gbPeriodo.BackColor = SystemColors.Window;
 
                     RelVendaBindingSource.DataSource = relVenda.GerarRelatorioPorData(inicio, fim);
                     rvVendas.RefreshReport();
