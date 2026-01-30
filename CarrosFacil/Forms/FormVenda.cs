@@ -212,12 +212,12 @@ namespace CarrosFacil.Forms
                 quantidadeEstoque = 0;
             }
 
-            if (!contadorEstoque.TryGetValue(item.id, out int quantidadeComprada))
+            if (!contadorEstoque.TryGetValue(item.id_veiculo, out int quantidadeComprada))
             {
                 quantidadeComprada = 0;
             }
 
-            if (quantidadeComprada > quantidadeEstoque)
+            if ((quantidadeComprada + item.quantidade) > quantidadeEstoque)
             {
                 MessageBox.Show("Falha ao adicionar, produto com estoque insuficiente.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -226,7 +226,7 @@ namespace CarrosFacil.Forms
             itensVenda.Add(item);
             qntItensVenda++;
 
-            contadorEstoque[item.id] = quantidadeEstoque + item.quantidade;
+            contadorEstoque[item.id_veiculo] = quantidadeComprada + item.quantidade;
 
             AtualizarItensVenda();
             tbDesconto_TextChanged(this, new EventArgs());
@@ -342,7 +342,17 @@ namespace CarrosFacil.Forms
                 return;
             }
 
-            // Baixamos o estoque.
+            // Registra o pagamento
+            PagamentoVenda pagamentoVenda = new PagamentoVenda();
+            pagamentoVenda.id_venda = venda.id;
+            pagamentoVenda.metodo = cbFormaPagamento.SelectedItem.ToString();
+            pagamentoVenda.parcelas = Math.Min(1, cbParcelas.SelectedIndex);
+            pagamentoVenda.valor_final = Convert.ToDecimal(tbValorPago.Text.Replace(",", "."));
+            if (pagamentoVenda.Cadastrar() == 0)
+            {
+                MessageBox.Show("Erro: Não foi possível registrar o pagamento.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Iteramos por todo os itens da venda e criamos objeto "ItemVenda" e alocamos os dados.
             int itensCadastrados = 0;
@@ -393,23 +403,21 @@ namespace CarrosFacil.Forms
 
         private void btRemover_Click(object sender, EventArgs e)
         {
-            decimal valorTotal = Convert.ToDecimal(dgvItens.SelectedRows[0].Cells[4].Value);
-            int quantidade = Convert.ToInt32(dgvItens.SelectedRows[0].Cells[3].Value);
+            decimal valorTotal = Convert.ToDecimal(dgvItens.SelectedRows[0].Cells[4].Value.ToString().Replace(",", "."));
+            int quantidade = Convert.ToInt32(dgvItens.SelectedRows[0].Cells[2].Value);
+            int id = Convert.ToInt32(dgvItens.SelectedRows[0].Cells[0].Value);
             vendaTotal = vendaTotal - valorTotal;
 
             tbValorTotal.Text = vendaTotal.ToString("N2");
 
             itensVenda.RemoveAt(dgvItens.SelectedRows[0].Index);
 
+            contadorEstoque[id] -= quantidade;
+
             AtualizarItensVenda();
 
             tbQuantidade.Text = itensVenda.Count.ToString();
             tbDesconto_TextChanged(this, new EventArgs());
-
-            // Obter o ID do produto selecionado
-
-
-            // Remove da lista baseado no ID e o valor final.
         }
 
         private void gbPagamneto_Enter(object sender, EventArgs e)

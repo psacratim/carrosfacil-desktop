@@ -164,7 +164,7 @@ namespace CarrosFacil.Forms.Relatorios
                 default:
                     inicio = dtpDataInicial.Value;
                     fim = dtpDataFinal.Value;
-                    if (inicio.Millisecond > fim.Millisecond)
+                    if (inicio > fim)
                     {
                         dtpDataInicial.Focus();
                         gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
