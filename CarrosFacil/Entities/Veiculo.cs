@@ -64,7 +64,7 @@ namespace CarrosFacil.Entities
                 "INSERT INTO veiculo (id_modelo, categoria, estado_do_veiculo, tempo_de_uso, preco_custo, preco_venda, " +
                 "preco_desconto, desconto, tem_desconto, lucro, quilometragem, cor, descricao, ano, " +
                 "tipo_cambio, tipo_combustivel, foto, estoque, data_cadastro, status) " +
-                "VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, '{11}', '{12}', {13}, '{14}', '{15}', '{16}', {17}, NOW(), {18});",
+                "VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, '{11}', '{12}', {13}, '{14}', '{15}', '{16}', {17}, NOW(), {18}); SELECT LAST_INSERT_ID();",
                 id_modelo,
                 categoria,
                 estado_do_veiculo,
@@ -86,8 +86,12 @@ namespace CarrosFacil.Entities
                 status
             );
 
+
             Conexao conexao = new Conexao();
-            return conexao.ExecutaQuery(query);
+            int id = conexao.ExecutaQueryID(query);
+            if (id == 0) return id;
+
+            return InserirCaracteristicas(id);
         }
 
         public int AtualizarVeiculo()
@@ -171,7 +175,7 @@ namespace CarrosFacil.Entities
 
         public DataTable CarregarModelos()
         {
-            string query = "SELECT DISTINCT m.id, m.nome 'nome' FROM modelo AS m INNER JOIN veiculo AS v ON m.id = v.id_modelo ORDER BY nome;";
+            string query = "SELECT DISTINCT m.id 'id_modelo', m.nome 'modelo' FROM modelo AS m INNER JOIN veiculo AS v ON m.id = v.id_modelo ORDER BY nome;";
             return new Conexao().RetornaDados(query);
         }
 
@@ -197,7 +201,26 @@ namespace CarrosFacil.Entities
             string valoresString = string.Join(", ", valores);
             string query = $"INSERT INTO caracteristica_carro (id_veiculo, id_caracteristica) VALUES {valoresString};";
 
-            return conexao.ExecutaQuery(query);
+            return new Conexao().ExecutaQuery(query);
+        }
+
+        public List<int> RetornaCaracteristicas(int idVeiculo)
+        {
+            List<int> lista = new List<int>();
+
+            string query = $"SELECT id_caracteristica FROM caracteristica_carro WHERE id_veiculo = {idVeiculo};";
+
+            DataTable tabela = new Conexao().RetornaDados(query);
+
+            if (tabela != null)
+            {
+                foreach (DataRow row in tabela.Rows)
+                {
+                    lista.Add(Convert.ToInt32(row["id_caracteristica"]));
+                }
+            }
+
+            return lista;
         }
 
         public DataTable ConsultarPorDesconto(bool comDesconto)
@@ -282,7 +305,7 @@ namespace CarrosFacil.Entities
 
         public DataTable CarregarVeiculos()
         {
-            string query = "SELECT veiculo.id, modelo.nome 'Modelo', veiculo.categoria, veiculo.preco_venda, veiculo.estoque " +
+            string query = "SELECT veiculo.id, modelo.nome 'modelo', modelo.id 'id_modelo', veiculo.categoria, veiculo.preco_venda, veiculo.estoque " +
                            "FROM veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo WHERE veiculo.status = 1;";
             return new Conexao().RetornaDados(query);
         }

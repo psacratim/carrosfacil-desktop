@@ -153,7 +153,7 @@
             this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(48)))), ((int)(((byte)(49)))));
             this.label26.Location = new System.Drawing.Point(21, 48);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(253, 15);
+            this.label26.Size = new System.Drawing.Size(252, 15);
             this.label26.TabIndex = 31;
             this.label26.Text = "* Todos os campos marcados são obrigatórios.";
             // 
@@ -232,6 +232,7 @@
             // 
             // cbStatus
             // 
+            this.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbStatus.Location = new System.Drawing.Point(129, 39);
             this.cbStatus.Name = "cbStatus";
             this.cbStatus.Size = new System.Drawing.Size(223, 25);

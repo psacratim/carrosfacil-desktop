@@ -511,6 +511,30 @@ namespace CarrosFacil.Forms
             }
         }
 
+        private void tbTempoUso_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            // Char 08: BACKSPACE
+            // Char 27: Escape
+            // Char 44: ,
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void tbEstoque_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Char 08: BACKSPACE
+            // Char 27: Escape
+            // Char 44: ,
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void tbKmsRodado_KeyPress_1(TextBox sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
@@ -531,6 +555,9 @@ namespace CarrosFacil.Forms
 
         private void tbKmsRodado_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Char 08: BACKSPACE
+            // Char 27: Escape
+            // Char 44: ,
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
             {
                 e.Handled = true;
@@ -597,6 +624,7 @@ namespace CarrosFacil.Forms
             veiculo.estoque = Convert.ToInt32(tbEstoque.Text);
             veiculo.status = cbStatus.SelectedIndex;
             veiculo.caracteristicas = caracteristicasSelecionadas;
+            veiculo.foto = lbFoto.Text;
 
             // SALVANDO A FOTO NO BANCO DE DADOS!
             if (imagem_atual != lbFoto.Text)

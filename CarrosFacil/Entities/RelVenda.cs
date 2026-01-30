@@ -48,7 +48,6 @@ namespace CarrosFacil.Entities
             this.metodo = "";
         }
 
-
         private string BASE_QUERY = "SELECT venda.id AS id_venda, veiculo.id AS id_veiculo, venda.data_cadastro, venda.desconto AS desconto, venda.valor_total AS valor_total, funcionario.nome AS id_funcionario, cliente.nome AS id_cliente, ( SELECT GROUP_CONCAT(pv.metodo SEPARATOR ', ') FROM pagamento_venda pv WHERE pv.id_venda = venda.id) AS metodo, modelo.nome AS id_modelo, marca.nome AS id_marca, item_venda.quantidade, item_venda.valor_unitario, item_venda.valor_total AS valor_total_itens FROM venda INNER JOIN item_venda ON item_venda.id_venda = venda.id INNER JOIN funcionario ON funcionario.id = venda.id_funcionario INNER JOIN cliente ON cliente.id = venda.id_cliente INNER JOIN veiculo ON veiculo.id = item_venda.id_veiculo INNER JOIN modelo ON modelo.id = veiculo.id_modelo INNER JOIN marca ON marca.id = modelo.id_marca";
 
         public DataTable GerarRelatorioPorData(DateTime inicio, DateTime fim)

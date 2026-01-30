@@ -59,12 +59,12 @@ namespace CarrosFacil.Forms.Consultas
             _ = Task.Run(() =>
             {
                 Veiculo veiculo = new Veiculo();
-                DataTable modelos = veiculo.CarregarVeiculos(); // Usa o método que traz id/nome
+                DataTable modelos = veiculo.CarregarModelos(); // Usa o método que traz id/nome
                 this.Invoke((Action)(() =>
                 {
                     cbModelo.DataSource = modelos;
-                    cbModelo.DisplayMember = "Modelo";
-                    cbModelo.ValueMember = "id";
+                    cbModelo.DisplayMember = "modelo";
+                    cbModelo.ValueMember = "id_modelo";
                 }));
             });
         }
@@ -211,6 +211,8 @@ namespace CarrosFacil.Forms.Consultas
                 formVeiculo.tbEstoque.Text = veiculo.estoque.ToString();
                 formVeiculo.status = veiculo.status == 1 ? 1 : 0;
 
+                formVeiculo.caracteristicasSelecionadas.AddRange(veiculo.RetornaCaracteristicas(idVeiculo));
+
                 // Foto do veículo
                 if (!string.IsNullOrWhiteSpace(veiculo.foto))
                 {
@@ -221,6 +223,7 @@ namespace CarrosFacil.Forms.Consultas
                         {
                             formVeiculo.pbFoto.LoadAsync(Uploader.CarregarImagemDoServidor(veiculo.foto));
                             formVeiculo.lbFoto.Text = veiculo.foto;
+                            formVeiculo.imagem_atual = veiculo.foto;
                         } else
                         {
                             MessageBox.Show("O veículo não tem nenhuma foto, adicione se necessário.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -129,6 +129,13 @@ namespace CarrosFacil.Forms
 
         private void PesquisarPorDataAdmissao()
         {
+            double difference = dtpDataInicial.Value.Subtract(dtpDataFinal.Value).TotalMilliseconds;
+            if (difference > 0)
+            {
+                MessageBox.Show("A data inicial deve ser menor que a final", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             dgvFuncionarios.DataSource = new Funcionario().ConsultarPorDataAdmissao(dtpDataInicial.Value, dtpDataFinal.Value);
         }
 

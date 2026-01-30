@@ -11,7 +11,7 @@ namespace CarrosFacil
 {
     class Uploader
     {
-        private static readonly string urlServidor = "http://localhost/INFO_50/carrosfacil/";
+        private static readonly string urlServidor = "http://localhost:3000/";
         private static readonly string urlUploadImage = urlServidor + "admin/upload_image.php";
 
         public static async Task<string> EnviarImagem(string caminhoImagem)
