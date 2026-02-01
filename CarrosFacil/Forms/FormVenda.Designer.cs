@@ -63,6 +63,11 @@ namespace CarrosFacil.Forms
             this.gbItensVenda = new System.Windows.Forms.GroupBox();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.gbPagamneto = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbTotalDesconto = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tbTotalPago = new System.Windows.Forms.TextBox();
+            this.cbParcelas = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tbDesconto = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -82,11 +87,6 @@ namespace CarrosFacil.Forms
             this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.btFechaVenda = new System.Windows.Forms.Button();
             this.timerPrincipal = new System.Windows.Forms.Timer(this.components);
-            this.cbParcelas = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbTotalPago = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbTotalDesconto = new System.Windows.Forms.TextBox();
             this.pnTituloVenda.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbFuncionario.SuspendLayout();
@@ -496,6 +496,51 @@ namespace CarrosFacil.Forms
             this.gbPagamneto.Text = "Checkout / Finalização";
             this.gbPagamneto.Enter += new System.EventHandler(this.gbPagamneto_Enter);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(873, 85);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(137, 19);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Total Desconto (R$):";
+            // 
+            // tbTotalDesconto
+            // 
+            this.tbTotalDesconto.Enabled = false;
+            this.tbTotalDesconto.Location = new System.Drawing.Point(873, 105);
+            this.tbTotalDesconto.Name = "tbTotalDesconto";
+            this.tbTotalDesconto.Size = new System.Drawing.Size(147, 25);
+            this.tbTotalDesconto.TabIndex = 36;
+            this.tbTotalDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(731, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(109, 19);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Total Pago (R$):";
+            // 
+            // tbTotalPago
+            // 
+            this.tbTotalPago.Enabled = false;
+            this.tbTotalPago.Location = new System.Drawing.Point(731, 50);
+            this.tbTotalPago.Name = "tbTotalPago";
+            this.tbTotalPago.Size = new System.Drawing.Size(136, 25);
+            this.tbTotalPago.TabIndex = 34;
+            this.tbTotalPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // cbParcelas
+            // 
+            this.cbParcelas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbParcelas.Enabled = false;
+            this.cbParcelas.Location = new System.Drawing.Point(297, 71);
+            this.cbParcelas.Name = "cbParcelas";
+            this.cbParcelas.Size = new System.Drawing.Size(59, 25);
+            this.cbParcelas.TabIndex = 32;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -600,9 +645,8 @@ namespace CarrosFacil.Forms
             // 
             // tbDinheiroFisico
             // 
-            this.tbDinheiroFisico.Enabled = false;
             this.tbDinheiroFisico.Location = new System.Drawing.Point(487, 71);
-            this.tbDinheiroFisico.MaxLength = 10;
+            this.tbDinheiroFisico.MaxLength = 16;
             this.tbDinheiroFisico.Name = "tbDinheiroFisico";
             this.tbDinheiroFisico.Size = new System.Drawing.Size(115, 25);
             this.tbDinheiroFisico.TabIndex = 21;
@@ -630,15 +674,14 @@ namespace CarrosFacil.Forms
             // 
             // tbValorPago
             // 
-            this.tbValorPago.Enabled = false;
             this.tbValorPago.Location = new System.Drawing.Point(168, 71);
-            this.tbValorPago.MaxLength = 10;
+            this.tbValorPago.MaxLength = 16;
             this.tbValorPago.Name = "tbValorPago";
             this.tbValorPago.Size = new System.Drawing.Size(119, 25);
             this.tbValorPago.TabIndex = 10;
             this.tbValorPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbValorPago.TextChanged += new System.EventHandler(this.tbValorPago_TextChanged);
-            this.tbValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.tbValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorPago_KeyPress);
             // 
             // lbFormaPagamento
             // 
@@ -656,7 +699,7 @@ namespace CarrosFacil.Forms
             this.cbFormaPagamento.Name = "cbFormaPagamento";
             this.cbFormaPagamento.Size = new System.Drawing.Size(148, 25);
             this.cbFormaPagamento.TabIndex = 3;
-            this.cbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cbFormaPagamento_SelectedIndexChanged_1);
+            this.cbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cbFormaPagamento_SelectedIndexChanged);
             // 
             // btFechaVenda
             // 
@@ -675,51 +718,6 @@ namespace CarrosFacil.Forms
             this.btFechaVenda.Text = "    FINALIZAR VENDA";
             this.btFechaVenda.UseVisualStyleBackColor = false;
             this.btFechaVenda.Click += new System.EventHandler(this.btFechaVenda_Click);
-            // 
-            // cbParcelas
-            // 
-            this.cbParcelas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbParcelas.Enabled = false;
-            this.cbParcelas.Location = new System.Drawing.Point(297, 71);
-            this.cbParcelas.Name = "cbParcelas";
-            this.cbParcelas.Size = new System.Drawing.Size(59, 25);
-            this.cbParcelas.TabIndex = 32;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(731, 29);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 19);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Total Pago (R$):";
-            // 
-            // tbTotalPago
-            // 
-            this.tbTotalPago.Enabled = false;
-            this.tbTotalPago.Location = new System.Drawing.Point(731, 50);
-            this.tbTotalPago.Name = "tbTotalPago";
-            this.tbTotalPago.Size = new System.Drawing.Size(136, 25);
-            this.tbTotalPago.TabIndex = 34;
-            this.tbTotalPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(873, 85);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(137, 19);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Total Desconto (R$):";
-            // 
-            // tbTotalDesconto
-            // 
-            this.tbTotalDesconto.Enabled = false;
-            this.tbTotalDesconto.Location = new System.Drawing.Point(873, 105);
-            this.tbTotalDesconto.Name = "tbTotalDesconto";
-            this.tbTotalDesconto.Size = new System.Drawing.Size(147, 25);
-            this.tbTotalDesconto.TabIndex = 36;
-            this.tbTotalDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FormVenda
             // 

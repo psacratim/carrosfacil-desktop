@@ -316,9 +316,9 @@ namespace CarrosFacil.Entities
             return conexao.RetornaDados(query);
         }
 
-        public DataTable BuscarCliente()
+        public DataTable BuscarClienteComCompras()
         {
-            string query = "SELECT id, nome FROM cliente WHERE status = 1";
+            string query = "SELECT DISTINCT cliente.id, cliente.nome FROM cliente JOIN venda ON venda.id_cliente = cliente.id WHERE cliente.status = 1";
 
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(query);

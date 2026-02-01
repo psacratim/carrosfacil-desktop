@@ -187,6 +187,7 @@
             this.txtLucroMaximo.Name = "txtLucroMaximo";
             this.txtLucroMaximo.Size = new System.Drawing.Size(45, 23);
             this.txtLucroMaximo.TabIndex = 8;
+            this.txtLucroMaximo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLucroMaximo_KeyPress);
             // 
             // txtLucroMinimo
             // 
@@ -195,6 +196,7 @@
             this.txtLucroMinimo.Name = "txtLucroMinimo";
             this.txtLucroMinimo.Size = new System.Drawing.Size(45, 23);
             this.txtLucroMinimo.TabIndex = 7;
+            this.txtLucroMinimo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLucroMinimo_KeyPress);
             // 
             // gbStatus
             // 

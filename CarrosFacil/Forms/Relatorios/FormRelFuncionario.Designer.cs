@@ -127,11 +127,13 @@
             this.cbTipoRel.Name = "cbTipoRel";
             this.cbTipoRel.Size = new System.Drawing.Size(170, 23);
             this.cbTipoRel.TabIndex = 0;
+            this.cbTipoRel.SelectedIndexChanged += new System.EventHandler(this.cbTipoRel_SelectedIndexChanged);
             // 
             // gbStatus
             // 
             this.gbStatus.Controls.Add(this.rbInativo);
             this.gbStatus.Controls.Add(this.rbAtivo);
+            this.gbStatus.Enabled = false;
             this.gbStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbStatus.Location = new System.Drawing.Point(209, 13);
@@ -162,6 +164,7 @@
             // gbCargo
             // 
             this.gbCargo.Controls.Add(this.cbCargo);
+            this.gbCargo.Enabled = false;
             this.gbCargo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbCargo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbCargo.Location = new System.Drawing.Point(12, 100);
@@ -173,6 +176,7 @@
             // 
             // cbCargo
             // 
+            this.cbCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCargo.Location = new System.Drawing.Point(10, 28);
             this.cbCargo.Name = "cbCargo";
             this.cbCargo.Size = new System.Drawing.Size(170, 23);
@@ -181,6 +185,7 @@
             // gbSexo
             // 
             this.gbSexo.Controls.Add(this.cbSexo);
+            this.gbSexo.Enabled = false;
             this.gbSexo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbSexo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbSexo.Location = new System.Drawing.Point(12, 171);
@@ -192,6 +197,7 @@
             // 
             // cbSexo
             // 
+            this.cbSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSexo.Location = new System.Drawing.Point(10, 28);
             this.cbSexo.Name = "cbSexo";
             this.cbSexo.Size = new System.Drawing.Size(145, 23);
@@ -203,6 +209,7 @@
             this.gbDataAdmissao.Controls.Add(this.label6);
             this.gbDataAdmissao.Controls.Add(this.dtpDataFinal);
             this.gbDataAdmissao.Controls.Add(this.dtpDataInicial);
+            this.gbDataAdmissao.Enabled = false;
             this.gbDataAdmissao.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbDataAdmissao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbDataAdmissao.Location = new System.Drawing.Point(12, 251);
@@ -249,6 +256,7 @@
             // gbCidade
             // 
             this.gbCidade.Controls.Add(this.cbCidade);
+            this.gbCidade.Enabled = false;
             this.gbCidade.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbCidade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbCidade.Location = new System.Drawing.Point(12, 322);
@@ -260,6 +268,7 @@
             // 
             // cbCidade
             // 
+            this.cbCidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCidade.Location = new System.Drawing.Point(10, 25);
             this.cbCidade.Name = "cbCidade";
             this.cbCidade.Size = new System.Drawing.Size(322, 23);
@@ -279,6 +288,7 @@
             // 
             // cbMes
             // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMes.Location = new System.Drawing.Point(10, 28);
             this.cbMes.Name = "cbMes";
             this.cbMes.Size = new System.Drawing.Size(129, 23);
@@ -290,6 +300,7 @@
             this.gbIdade.Controls.Add(this.label13);
             this.gbIdade.Controls.Add(this.txtIdadeFinal);
             this.gbIdade.Controls.Add(this.txtIdadeInicial);
+            this.gbIdade.Enabled = false;
             this.gbIdade.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.gbIdade.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(110)))), ((int)(((byte)(114)))));
             this.gbIdade.Location = new System.Drawing.Point(179, 180);
@@ -321,17 +332,21 @@
             // 
             this.txtIdadeFinal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIdadeFinal.Location = new System.Drawing.Point(125, 25);
+            this.txtIdadeFinal.MaxLength = 3;
             this.txtIdadeFinal.Name = "txtIdadeFinal";
             this.txtIdadeFinal.Size = new System.Drawing.Size(40, 23);
             this.txtIdadeFinal.TabIndex = 2;
+            this.txtIdadeFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdadeFinal_KeyPress);
             // 
             // txtIdadeInicial
             // 
             this.txtIdadeInicial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtIdadeInicial.Location = new System.Drawing.Point(37, 25);
+            this.txtIdadeInicial.MaxLength = 3;
             this.txtIdadeInicial.Name = "txtIdadeInicial";
             this.txtIdadeInicial.Size = new System.Drawing.Size(40, 23);
             this.txtIdadeInicial.TabIndex = 3;
+            this.txtIdadeInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIdadeInicial_KeyPress);
             // 
             // btGerarRelatorio
             // 

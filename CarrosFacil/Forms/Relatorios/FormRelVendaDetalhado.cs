@@ -30,12 +30,12 @@ namespace CarrosFacil.Forms.Relatorios
             this.rvVendas.RefreshReport();
 
             Funcionario funcionario = new Funcionario();
-            cbFuncionario.DataSource = funcionario.BuscarFuncionario();
+            cbFuncionario.DataSource = funcionario.BuscarFuncionarioComVendas();
             cbFuncionario.DisplayMember = "nome";
             cbFuncionario.ValueMember = "id";
 
             Cliente cliente = new Cliente();
-            cbCliente.DataSource = cliente.BuscarCliente();
+            cbCliente.DataSource = cliente.BuscarClienteComCompras();
             cbCliente.DisplayMember = "nome";
             cbCliente.ValueMember = "id";
         }
@@ -120,8 +120,8 @@ namespace CarrosFacil.Forms.Relatorios
                     gbCliente.BackColor = SystemColors.Window;
 
                     DateTime inicio = dtpDataInicial.Value;
-                    DateTime fim = dtpDataFinal.Value;
-                    if (inicio.Millisecond > fim.Millisecond)
+                    DateTime fim = dtpDataFinal.Value.AddSeconds(1);
+                    if (inicio > fim)
                     {
                         dtpDataInicial.Focus();
                         gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
@@ -146,8 +146,8 @@ namespace CarrosFacil.Forms.Relatorios
                     gbFuncionario.BackColor = SystemColors.Window;
 
                     inicio = dtpDataInicial.Value;
-                    fim = dtpDataFinal.Value;
-                    if (inicio.Millisecond > fim.Millisecond)
+                    fim = dtpDataFinal.Value.AddSeconds(1);
+                    if (inicio > fim)
                     {
                         dtpDataInicial.Focus();
                         gbPeriodo.BackColor = Color.FromArgb(179, 221, 255);
@@ -163,7 +163,7 @@ namespace CarrosFacil.Forms.Relatorios
                     break;
                 default:
                     inicio = dtpDataInicial.Value;
-                    fim = dtpDataFinal.Value;
+                    fim = dtpDataFinal.Value.AddSeconds(1);
                     if (inicio > fim)
                     {
                         dtpDataInicial.Focus();
@@ -176,6 +176,14 @@ namespace CarrosFacil.Forms.Relatorios
                     RelVendaBindingSource.DataSource = relVenda.GerarRelatorioPorData(inicio, fim);
                     rvVendas.RefreshReport();
                     break;
+            }
+        }
+
+        private void btSair_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja fechar o relatório de vendas?", "Sistema Carros Fácil", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Close();
             }
         }
     }

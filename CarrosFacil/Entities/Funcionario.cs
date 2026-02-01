@@ -359,5 +359,12 @@ namespace CarrosFacil.Entities
             Conexao conexao = new Conexao();
             return conexao.RetornaDados(query);
         }
+        public DataTable BuscarFuncionarioComVendas()
+        {
+            string query = "SELECT DISTINCT funcionario.id, funcionario.nome FROM funcionario JOIN venda ON venda.id_funcionario = funcionario.id WHERE funcionario.status = 1 ORDER BY nome";
+
+            Conexao conexao = new Conexao();
+            return conexao.RetornaDados(query);
+        }
     }
 }

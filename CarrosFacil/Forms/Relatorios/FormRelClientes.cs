@@ -136,6 +136,12 @@ namespace CarrosFacil.Forms.Relatorios
             switch (relatorio)
             {
                 case 1:
+                    if (cbCidade.SelectedIndex == -1)
+                    {
+                        MessageBox.Show("Por favor, selecione uma cidade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     string cidade = cbCidade.SelectedValue.ToString();
 
                     ClienteBindingSource.DataSource = cliente.RelatorioPorCidade(cidade);

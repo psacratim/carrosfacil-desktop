@@ -46,8 +46,8 @@ namespace CarrosFacil.Forms.Relatorios
                 this.Invoke((Action)(() =>
                 {
                     cbModelo.DataSource = modelos;
-                    cbModelo.DisplayMember = "nome";
-                    cbModelo.ValueMember = "id";
+                    cbModelo.DisplayMember = "modelo";
+                    cbModelo.ValueMember = "id_modelo";
                     if (cbModelo.Items.Count > 0) cbModelo.SelectedIndex = 0;
 
                     cbCategoria.DataSource = categorias;
@@ -108,6 +108,10 @@ namespace CarrosFacil.Forms.Relatorios
                     switch (cbEstado.SelectedIndex)
                     {
                         case 1:
+                            estado = "Semi-novo";
+                            break;
+
+                        case 2:
                             estado = "Novo";
                             break;
 
@@ -155,6 +159,24 @@ namespace CarrosFacil.Forms.Relatorios
                     VeiculoBindingSource.DataSource = veiculo.RelatorioPorModelo(modelo);
                     rvVeiculo.RefreshReport();
                     break;
+            }
+        }
+
+        private void txtLucroMinimo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 13 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void txtLucroMaximo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 13 && e.KeyChar != 27 && e.KeyChar != 01)
+            {
+                e.Handled = true;
+                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

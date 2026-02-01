@@ -362,6 +362,7 @@ namespace CarrosFacil.Entities
         public bool AtualizarEstoque(int id, int quantidade)
         {
             string query = "UPDATE veiculo SET estoque = " + quantidade + " WHERE id = " + id;
+
             return new Conexao().ExecutaQuery(query) == 1;
         }
 
