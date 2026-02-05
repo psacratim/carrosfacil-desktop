@@ -196,7 +196,7 @@ namespace CarrosFacil.Forms
             veiculo.id_modelo = (int) cbModelo.SelectedValue;
             veiculo.categoria = cbCategoria.SelectedItem.ToString();
             veiculo.estado_do_veiculo = cbEstadoVeiculo.SelectedItem.ToString();
-            veiculo.tempo_de_uso = Convert.ToInt32(tbTempoUso.Text);
+            veiculo.tempo_de_uso = Convert.ToInt32(tbTempoUso.Text);                                                
             veiculo.preco_custo = Convert.ToDecimal(tbPrecoCusto.Text.Replace(".", "").Replace(",", "."));
             veiculo.preco_venda = Convert.ToDecimal(tbPrecoVenda.Text.Replace(".", "").Replace(",", "."));
             veiculo.preco_desconto = Convert.ToDecimal(tbPrecoDesconto.Text.Replace(".", "").Replace(",", "."));

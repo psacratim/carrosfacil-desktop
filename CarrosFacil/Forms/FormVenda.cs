@@ -339,6 +339,7 @@ namespace CarrosFacil.Forms
                 return;
             }
 
+            
             if (temDesconto && valorDesconto > 0)
             {
                 valorTotal = valorDesconto;
@@ -359,7 +360,7 @@ namespace CarrosFacil.Forms
             Venda venda = new Venda();
             venda.id_cliente = Convert.ToInt32(dgvCliente.SelectedRows[0].Cells[0].Value);
             venda.id_funcionario = Convert.ToInt32(cbFuncionario.SelectedValue);
-            venda.valor_total = Convert.ToDecimal(tbValorTotal.Text);
+            venda.valor_total = Convert.ToDecimal(valorTotal);
             venda.valor_desconto = Convert.ToDecimal(tbTotalDesconto.Text);
             venda.desconto = desconto;
 
