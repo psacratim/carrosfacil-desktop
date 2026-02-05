@@ -320,6 +320,11 @@ namespace CarrosFacil.Forms
             }
 
             bool efetuouPagamento = decimal.TryParse(tbValorPago.Text.Replace(".", "").Replace(",", "."), out decimal valorPago);
+            if (!decimal.TryParse(tbValorPago.Text.Replace(".", "").Replace(",", "."), out decimal valorDinheiro))
+            {
+                valorDinheiro = 0;
+            }
+
             bool temValorTotal = decimal.TryParse(tbValorTotal.Text, out decimal valorTotal);
             bool temDesconto = decimal.TryParse(tbTotalDesconto.Text, out decimal valorDesconto);
             if (!efetuouPagamento || valorPago <= 0)
@@ -339,7 +344,7 @@ namespace CarrosFacil.Forms
                 valorTotal = valorDesconto;
             }
 
-            if (valorPago < valorTotal)
+            if ((valorPago + valorDinheiro) < valorTotal)
             {
                 MessageBox.Show("Erro: O cliente está pagando menos que o valor total, ajuste a quantia paga.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -456,77 +461,19 @@ namespace CarrosFacil.Forms
 
         }
 
-
-        private void verificarDecimalValido(TextBox sender, KeyPressEventArgs e)
-        {
-            // 8 = backspace
-            if (e.KeyChar == (char)8) return;
-
-            // números
-            if (char.IsDigit(e.KeyChar))
-            {
-                // se já tem vírgula, bloquear mais de 2 casas decimais
-                if (sender.Text.Contains(","))
-                {
-                    int posVirgula = sender.Text.IndexOf(",");
-                    int casas = sender.Text.Length - posVirgula - 1;
-
-                    if (sender.SelectionStart > posVirgula && casas >= 2)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
-                }
-
-                return;
-            }
-
-            // "." ou ","
-            if (e.KeyChar == '.' || e.KeyChar == ',')
-            {
-                // não deixa começar com "." ou ","
-                if (sender.Text.Length == 0)
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                // bloqueia 2 virgulas ou ponto após virgula
-                if (sender.Text.Contains(","))
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                // não deixa separador logo depois de outro separador
-                char ultimo = sender.Text[sender.Text.Length - 1];
-                if (ultimo == '.' || ultimo == ',')
-                {
-                    e.Handled = true;
-                    return;
-                }
-
-                return;
-            }
-
-            // Se chegou até aqui = Letras não permitidas que não cairam no IF.
-            // Bloqueia.
-            e.Handled = true;
-        }
-
         private void tbValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
-            verificarDecimalValido((TextBox)sender, e);
+            FormHelper.ValidarDecimal((TextBox)sender, e);
         }
 
         private void tbDinheiroPago_KeyPress(object sender, KeyPressEventArgs e)
         {
-            verificarDecimalValido((TextBox)sender, e);
+            FormHelper.ValidarDecimal((TextBox)sender, e);
         }
 
         private void tbDinheiroFisico_KeyPress(object sender, KeyPressEventArgs e)
         {
-            verificarDecimalValido((TextBox)sender, e);
+            FormHelper.ValidarDecimal((TextBox)sender, e);
 
             if (decimal.TryParse(tbDinheiroFisico.Text.Replace(".", "").Replace(",", "."), out decimal dinheiroFisico) && 
                 decimal.TryParse(tbValorTotal.Text, out decimal valorTotal) &&
@@ -540,11 +487,7 @@ namespace CarrosFacil.Forms
 
         private void tbDesconto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
-            {
-                e.Handled = true;
-                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            FormHelper.ApenasNumeros(e);
         }
 
         private void AtualizarValorTotalPago()
@@ -608,6 +551,28 @@ namespace CarrosFacil.Forms
             cbParcelas.Enabled = cbFormaPagamento.SelectedIndex == 0;
             tbDesconto.Enabled = true;
             tbValorPago.Enabled = true;
+        }
+
+        private void txtQtde_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtQtdeEstoque.Text))
+            {
+                MessageBox.Show("Por favor, selecione um produto antes de alterar a quantidade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Handled = true;
+                return;
+            }
+
+            FormHelper.ApenasNumeros(e);
+        }
+
+        private void FormVenda_MouseDown(object sender, MouseEventArgs e)
+        {
+            FormHelper.MoverForm(this.Handle);
+        }
+
+        private void pnTituloVenda_MouseDown(object sender, MouseEventArgs e)
+        {
+            FormHelper.MoverForm(this.Handle);
         }
     }
 }

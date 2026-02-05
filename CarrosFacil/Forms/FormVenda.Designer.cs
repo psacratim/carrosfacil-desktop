@@ -111,6 +111,7 @@ namespace CarrosFacil.Forms
             this.pnTituloVenda.Name = "pnTituloVenda";
             this.pnTituloVenda.Size = new System.Drawing.Size(1300, 85);
             this.pnTituloVenda.TabIndex = 231;
+            this.pnTituloVenda.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnTituloVenda_MouseDown);
             // 
             // labelVendaAviso
             // 
@@ -364,6 +365,7 @@ namespace CarrosFacil.Forms
             this.txtQtde.Size = new System.Drawing.Size(80, 23);
             this.txtQtde.TabIndex = 5;
             this.txtQtde.TextChanged += new System.EventHandler(this.txtQtde_TextChanged);
+            this.txtQtde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQtde_KeyPress);
             // 
             // label6
             // 
@@ -739,6 +741,7 @@ namespace CarrosFacil.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PDV - CarrosFácil";
             this.Load += new System.EventHandler(this.formVenda49_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormVenda_MouseDown);
             this.pnTituloVenda.ResumeLayout(false);
             this.pnTituloVenda.PerformLayout();
             this.groupBox3.ResumeLayout(false);

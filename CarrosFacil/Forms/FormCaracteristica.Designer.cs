@@ -153,7 +153,7 @@
             this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(48)))), ((int)(((byte)(49)))));
             this.label26.Location = new System.Drawing.Point(21, 48);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(252, 15);
+            this.label26.Size = new System.Drawing.Size(253, 15);
             this.label26.TabIndex = 31;
             this.label26.Text = "* Todos os campos marcados são obrigatórios.";
             // 
@@ -313,7 +313,7 @@
             this.Controls.Add(this.btnCadastrar);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label26);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "FormCaracteristica";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -535,13 +535,9 @@ namespace CarrosFacil.Forms
             }
         }
 
-        private void tbKmsRodado_KeyPress_1(TextBox sender, KeyPressEventArgs e)
+        private void FormVeiculo_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08 && e.KeyChar != 27 && e.KeyChar != 01)
-            {
-                e.Handled = true;
-                MessageBox.Show("Esse campo aceita somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            FormHelper.MoverForm(this.Handle);
         }
 
         private void tbPlaca_KeyPress(object sender, KeyPressEventArgs e)

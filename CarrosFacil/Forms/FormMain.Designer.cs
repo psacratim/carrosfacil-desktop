@@ -39,7 +39,6 @@
             this.menuCadCaracteristicas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCadCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCadVeiculo = new System.Windows.Forms.ToolStripMenuItem();
-            this.vendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConsFuncionarios = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuConsClientes = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,8 +92,7 @@
             this.menuCadModelos,
             this.menuCadCaracteristicas,
             this.menuCadCliente,
-            this.menuCadVeiculo,
-            this.vendaToolStripMenuItem});
+            this.menuCadVeiculo });
             this.menuCadastros.ForeColor = System.Drawing.Color.White;
             this.menuCadastros.Image = ((System.Drawing.Image)(resources.GetObject("menuCadastros.Image")));
             this.menuCadastros.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -156,11 +154,6 @@
             this.menuCadVeiculo.Size = new System.Drawing.Size(191, 24);
             this.menuCadVeiculo.Text = "Veículo";
             this.menuCadVeiculo.Click += new System.EventHandler(this.menuCadVeiculo_Click);
-            // 
-            // vendaToolStripMenuItem
-            // 
-            this.vendaToolStripMenuItem.Name = "vendaToolStripMenuItem";
-            this.vendaToolStripMenuItem.Size = new System.Drawing.Size(191, 24);
             // 
             // menuConsFuncionarios
             // 
@@ -385,7 +378,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuRelFuncionario;
         private System.Windows.Forms.ToolStripMenuItem menuRelClientes;
         private System.Windows.Forms.ToolStripMenuItem menuRelVeiculos;
-        private System.Windows.Forms.ToolStripMenuItem vendaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuRelVendas;
     }
 }

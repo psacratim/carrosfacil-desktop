@@ -135,6 +135,7 @@
     <Compile Include="FormElements\C_GroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FormHelper.cs" />
     <Compile Include="Forms\Consultas\FormConsCaracteristicas.cs">
       <SubType>Form</SubType>
     </Compile>

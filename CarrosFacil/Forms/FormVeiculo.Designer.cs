@@ -205,7 +205,7 @@ namespace CarrosFacil.Forms
             this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.label26.Location = new System.Drawing.Point(24, 60);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(232, 15);
+            this.label26.Size = new System.Drawing.Size(233, 15);
             this.label26.TabIndex = 64;
             this.label26.Text = "* Todos os campos com * são obrigatórios.";
             // 
@@ -279,7 +279,7 @@ namespace CarrosFacil.Forms
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label6.Location = new System.Drawing.Point(145, 30);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 15);
+            this.label6.Size = new System.Drawing.Size(103, 15);
             this.label6.TabIndex = 76;
             this.label6.Text = "* Tipo de Câmbio:";
             // 
@@ -299,7 +299,7 @@ namespace CarrosFacil.Forms
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.label7.Location = new System.Drawing.Point(277, 95);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 15);
+            this.label7.Size = new System.Drawing.Size(111, 15);
             this.label7.TabIndex = 83;
             this.label7.Text = "* Tempo Uso (Dias):";
             // 
@@ -777,6 +777,7 @@ namespace CarrosFacil.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gerenciando - Veículo";
             this.Load += new System.EventHandler(this.FormVeiculo_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormVeiculo_MouseDown);
             this.gbPrecoVenda.ResumeLayout(false);
             this.gbPrecoVenda.PerformLayout();
             this.groupBox3.ResumeLayout(false);

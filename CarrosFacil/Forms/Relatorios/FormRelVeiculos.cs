@@ -136,6 +136,12 @@ namespace CarrosFacil.Forms.Relatorios
                         lucroMaximo = Convert.ToInt32(txtLucroMaximo.Text);
                     }
 
+                    if (lucroMinimo > lucroMaximo)
+                    {
+                        MessageBox.Show("O lucro mínimo não pode ser maior que o máximo.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     VeiculoBindingSource.DataSource = veiculo.RelatorioPorLucro(lucroMinimo, lucroMaximo);
                     rvVeiculo.RefreshReport();
                     break;
